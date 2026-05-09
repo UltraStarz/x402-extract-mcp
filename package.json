@@ -1,0 +1,54 @@
+{
+  "name": "x402-extract-mcp",
+  "version": "0.1.0",
+  "description": "MCP server for paid web-extraction. Agents pay $0.01 USDC per call to extract structured Product schema from any URL.",
+  "type": "module",
+  "bin": {
+    "x402-extract-mcp": "dist/index.js"
+  },
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "scripts",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "tsc && node scripts/postbuild.mjs",
+    "dev": "tsx src/index.ts",
+    "start": "node dist/index.js",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "x402",
+    "web-extraction",
+    "scraping",
+    "agent",
+    "claude",
+    "ai-agent",
+    "usdc",
+    "paid-api"
+  ],
+  "author": "",
+  "license": "MIT",
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.4",
+    "viem": "^2.21.55",
+    "x402-fetch": "^1.1.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.2",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2"
+  },
+  "homepage": "https://github.com/UltraStarz/x402-extract-mcp",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/UltraStarz/x402-extract-mcp.git"
+  }
+}
