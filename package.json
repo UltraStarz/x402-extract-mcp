@@ -50,5 +50,6 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/UltraStarz/x402-extract-mcp.git"
-  }
+  },
+  "mcpName": "io.github.UltraStarz/x402-extract"
 }
