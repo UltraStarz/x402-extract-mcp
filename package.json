@@ -1,6 +1,6 @@
 {
   "name": "x402-extract-mcp",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "MCP server for paid web-extraction. Agents pay $0.01 USDC per call to extract structured Product schema from any URL.",
   "type": "module",
   "bin": {
