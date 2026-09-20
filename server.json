@@ -1,14 +1,14 @@
 {
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
   "name": "io.github.UltraStarz/x402-extract",
-  "title": "Tollkit Extract",
-  "description": "URL in, schema.org/Product JSON out. $0.01 USDC via x402. Free preview, no account or key.",
+  "title": "Tollkit",
+  "description": "Extract product data, or notarize what a page said. Paid per call in USDC, no signup or API key.",
   "websiteUrl": "https://extract.tollkit.dev",
   "repository": {
     "url": "https://github.com/UltraStarz/x402-extract-mcp",
     "source": "github"
   },
-  "version": "0.2.0",
+  "version": "0.3.0",
   "remotes": [
     {
       "type": "streamable-http",
