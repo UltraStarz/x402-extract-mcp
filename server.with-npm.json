@@ -14,5 +14,24 @@
       "type": "streamable-http",
       "url": "https://extract.tollkit.dev/mcp"
     }
+  ],
+  "packages": [
+    {
+      "registryType": "npm",
+      "identifier": "x402-extract-mcp",
+      "version": "0.2.0",
+      "transport": {
+        "type": "stdio"
+      },
+      "environmentVariables": [
+        {
+          "description": "Ethereum private key for the buyer wallet that pays the per-call USDC fee.",
+          "isRequired": true,
+          "format": "string",
+          "isSecret": true,
+          "name": "BUYER_PRIVATE_KEY"
+        }
+      ]
+    }
   ]
 }
