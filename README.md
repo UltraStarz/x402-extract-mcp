@@ -80,7 +80,7 @@ You'll get back structured JSON with the product name, price, formats, availabil
 | Env var             | Required | Default                                                   |
 | ------------------- | -------- | --------------------------------------------------------- |
 | `BUYER_PRIVATE_KEY` | yes      | —                                                         |
-| `EXTRACT_URL`       | no       | `https://x402-extract-production.up.railway.app/extract`  |
+| `EXTRACT_URL`       | no       | `https://extract.tollkit.dev/extract`  |
 
 To point the MCP server at your own seller deployment, override `EXTRACT_URL`.
 

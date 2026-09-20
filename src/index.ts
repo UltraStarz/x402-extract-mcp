@@ -29,9 +29,10 @@ import { wrapFetchWithPayment } from "x402-fetch";
 import { privateKeyToAccount } from "viem/accounts";
 
 const PRIVATE_KEY = process.env.BUYER_PRIVATE_KEY as `0x${string}` | undefined;
+// The Railway deployment this used to default to is gone. Anyone who
+// installed 0.1.x and left EXTRACT_URL unset has been calling a dead host.
 const EXTRACT_URL =
-  process.env.EXTRACT_URL ??
-  "https://x402-extract-production.up.railway.app/extract";
+  process.env.EXTRACT_URL ?? "https://extract.tollkit.dev/extract";
 
 if (!PRIVATE_KEY || !PRIVATE_KEY.startsWith("0x")) {
   console.error(
