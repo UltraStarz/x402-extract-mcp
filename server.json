@@ -2,13 +2,13 @@
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
   "name": "io.github.UltraStarz/x402-extract",
   "title": "Tollkit",
-  "description": "Product prices, signed page proofs and free x402 service checks. Paid per call in USDC, no signup.",
+  "description": "Read or screenshot any page, product prices, signed page proofs. Paid per call in USDC, no signup.",
   "websiteUrl": "https://extract.tollkit.dev",
   "repository": {
     "url": "https://github.com/UltraStarz/x402-extract-mcp",
     "source": "github"
   },
-  "version": "0.4.0",
+  "version": "0.5.0",
   "remotes": [
     {
       "type": "streamable-http",
