@@ -1,120 +1,54 @@
-# x402-extract-mcp
+# Tollkit MCP server
 
-A paid MCP server that gives AI agents structured product data from any URL.
+Pay-per-call tools for AI agents, as one remote MCP server:
 
-Each `extract_product` tool call:
-1. Renders the URL through a headless browser
-2. Extracts a `schema.org/Product` JSON blob (name, price, currency, availability, variants, …)
-3. Costs **$0.01 USDC** per call, paid automatically from the configured wallet via [x402](https://x402.org)
+```
+https://extract.tollkit.dev/mcp
+```
 
-No API keys. No subscription. The agent pays the toll, gets the data.
+No account and no API key. Each paid tool costs a fixed amount of USDC, paid per call with [x402](https://x402.org) on **Base or Solana**. A call that fails is never charged.
 
-## Install in Claude Desktop / Cursor / Windsurf
+Listed in the official [MCP Registry](https://registry.modelcontextprotocol.io) as `io.github.UltraStarz/x402-extract`.
 
-Add this to your MCP config (`~/Library/Application Support/Claude/claude_desktop_config.json` on macOS):
+## Connect
+
+Add the URL above as a remote (Streamable HTTP) MCP server in Claude, Cursor or any MCP client. In clients that take a JSON config:
 
 ```json
 {
   "mcpServers": {
-    "x402-extract": {
-      "command": "npx",
-      "args": ["-y", "x402-extract-mcp"],
-      "env": {
-        "BUYER_PRIVATE_KEY": "0xYOUR_PRIVATE_KEY"
-      }
-    }
+    "tollkit": { "url": "https://extract.tollkit.dev/mcp" }
   }
 }
 ```
 
-Restart your MCP client. You'll see an `extract_product` tool available.
+**Paying:** MCP has no 402 status, so a paid tool called without its `payment` argument returns the price quote as its result. Sign that quote with your x402 wallet and call the tool again with `payment` set. Two tools are free: `try_it_free` (a real sample result) and `get_service_info`.
 
-## What you need
+## Tools
 
-A wallet on **Base Sepolia** (testnet) funded with:
+| Group | Tools | Price per call |
+|---|---|---|
+| Web pages & documents | read a page in a real browser, screenshot, summarize, page brief, PDF to text, web search + read top pages | $0.002 – $0.015 |
+| Public data | SEC filings, financials, company snapshot and due diligence; US weather (by address or point); FAA airport delays; US address geocoding; exchange rates; IP lookup | $0.002 – $0.03 |
+| On-chain (Base, Ethereum, Solana) | wallet balance and portfolio, token info, token price, token safety check, transaction lookup, pre-trade check | $0.002 – $0.01 |
+| x402 market data | best x402 tools for a task, seller lookup, full market dataset | $0.01 – $0.10 |
+| Product data | price, stock, brand, SKU and images from a store page; compare up to 5 | $0.01 – $0.04 |
+| Proof | signed, timestamped record of what a page said | $0.25 |
 
-- A small amount of ETH for gas (free from <https://www.coinbase.com/faucets/base-ethereum-sepolia-faucet>)
-- USDC for payments (free from <https://faucet.circle.com>, select Base Sepolia)
+Live prices: [`/health`](https://extract.tollkit.dev/health) · every tool with its URL and body: [`llms.txt`](https://extract.tollkit.dev/llms.txt) · [tollkit.dev/tools](https://tollkit.dev/tools)
 
-Generate a throwaway key:
+## Without MCP
 
-```bash
-node -e "const {generatePrivateKey,privateKeyToAccount}=require('viem/accounts');const k=generatePrivateKey();console.log('PRIVATE_KEY=',k);console.log('ADDRESS=',privateKeyToAccount(k).address)"
-```
+Every tool is also a plain HTTP endpoint: POST the JSON body, get HTTP 402 with the price, pay with any x402 client (for example `@x402/fetch`), repeat the request. OpenAPI per hostname, e.g. [`https://data.tollkit.dev/openapi.json`](https://data.tollkit.dev/openapi.json).
 
-Use the printed address to claim from faucets, then put the printed key into your MCP config.
+## This repo
 
-## Try it
+`server.json` is the MCP Registry entry. `src/` holds an older stdio client (the `x402-extract-mcp` npm package) that only wraps product extraction and is no longer maintained; use the remote server above instead.
 
-In Claude Desktop, paste a product URL and ask:
+## More
 
-> Extract this product page using extract_product: https://stormkeep-odl.bandcamp.com/album/the-nocturnes-of-iswylm-2
+- [Weekly x402 market report](https://tollkit.dev/report) — free
+- [Live sales](https://tollkit.dev/stats) · [Status](https://tollkit.dev/status)
+- hello@tollkit.dev · Tollkit LLC
 
-You'll get back structured JSON with the product name, price, formats, availability, etc. The on-chain transfer is visible at <https://sepolia.basescan.org>.
-
-## What the response looks like
-
-```json
-{
-  "product": {
-    "name": "The Nocturnes Of Iswylm",
-    "description": "...",
-    "brand": "Stormkeep",
-    "price": 10,
-    "currency": "USD",
-    "availability": "preorder",
-    "variants": [
-      { "name": "Format", "values": ["Digital Album", "12\" Vinyl (black)", ...] },
-      { "name": "Vinyl Color", "values": ["Black", "Violet", ...] }
-    ],
-    "images": [],
-    "url": "https://..."
-  },
-  "page": { "title": "...", "status": 200, "render_ms": 2879 },
-  "extraction": { "model": "claude-haiku-4-5", "input_tokens": 4479, "output_tokens": 405 }
-}
-```
-
-## Configuration
-
-| Env var             | Required | Default                                                   |
-| ------------------- | -------- | --------------------------------------------------------- |
-| `BUYER_PRIVATE_KEY` | yes      | —                                                         |
-| `EXTRACT_URL`       | no       | `https://extract.tollkit.dev/extract`  |
-
-To point the MCP server at your own seller deployment, override `EXTRACT_URL`.
-
-## How it works
-
-```
-Claude Desktop ──tool call──> MCP server (this package, on your machine)
-                              │
-                              │ x402 payment + URL
-                              ▼
-                              Public seller (Hono + Playwright + Claude on Railway)
-                              │
-                              │ structured JSON
-                              ▼
-                              MCP server ──tool result──> Claude Desktop
-```
-
-The MCP server doesn't render pages itself. It signs an x402 payment with the buyer's wallet, sends the payment + URL to a public seller endpoint, and returns the seller's response. The seller does the actual headless rendering and Claude-driven schema extraction.
-
-## What works, what doesn't
-
-**Works well:**
-- Bandcamp release pages
-- Most small/medium Shopify stores
-- Tesla Shop product pages
-- Any site that doesn't have aggressive anti-bot
-
-**Will return a fetch error** (page status 403/429/no-content):
-- Amazon, Walmart, Target, Best Buy
-- Most luxury brand sites on Cloudflare
-- LinkedIn, Twitter/X (auth wall)
-
-A future version will add residential-proxy support to handle these.
-
-## License
-
-MIT
+MIT licensed.
