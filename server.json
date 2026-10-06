@@ -2,13 +2,13 @@
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
   "name": "io.github.UltraStarz/x402-extract",
   "title": "Tollkit",
-  "description": "Web pages, screenshots, on-chain data, SEC filings, IP, weather, FX, prices. USDC on Base or Solana.",
-  "websiteUrl": "https://extract.tollkit.dev",
+  "description": "Read pages and PDFs, SEC filings, weather, airport delays, on-chain and x402 data. USDC per call.",
+  "websiteUrl": "https://tollkit.dev/connect",
   "repository": {
     "url": "https://github.com/UltraStarz/x402-extract-mcp",
     "source": "github"
   },
-  "version": "0.8.0",
+  "version": "0.9.0",
   "remotes": [
     {
       "type": "streamable-http",
