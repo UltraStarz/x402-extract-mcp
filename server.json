@@ -12,7 +12,7 @@
   "remotes": [
     {
       "type": "streamable-http",
-      "url": "https://extract.tollkit.dev/mcp"
+      "url": "https://api.tollkit.dev/mcp"
     }
   ]
 }

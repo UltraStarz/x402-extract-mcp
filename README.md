@@ -3,7 +3,7 @@
 Pay-per-call tools for AI agents, as one remote MCP server:
 
 ```
-https://extract.tollkit.dev/mcp
+https://api.tollkit.dev/mcp
 ```
 
 No account and no API key. Each paid tool costs a fixed amount of USDC, paid per call with [x402](https://x402.org) on **Base or Solana**. A call that fails is never charged.
@@ -17,7 +17,7 @@ Add the URL above as a remote (Streamable HTTP) MCP server in Claude, Cursor or 
 ```json
 {
   "mcpServers": {
-    "tollkit": { "url": "https://extract.tollkit.dev/mcp" }
+    "tollkit": { "url": "https://api.tollkit.dev/mcp" }
   }
 }
 ```
@@ -35,7 +35,7 @@ Add the URL above as a remote (Streamable HTTP) MCP server in Claude, Cursor or 
 | Product data | price, stock, brand, SKU and images from a store page; compare up to 5 | $0.01 – $0.04 |
 | Proof | signed, timestamped record of what a page said | $0.25 |
 
-Live prices: [`/health`](https://extract.tollkit.dev/health) · every tool with its URL and body: [`llms.txt`](https://extract.tollkit.dev/llms.txt) · [tollkit.dev/tools](https://tollkit.dev/tools)
+Live prices: [`/health`](https://extract.tollkit.dev/health) · every tool with its URL and body: [`llms.txt`](https://api.tollkit.dev/llms.txt) · [tollkit.dev/tools](https://tollkit.dev/tools)
 
 ## Without MCP
 
