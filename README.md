@@ -22,18 +22,18 @@ Add the URL above as a remote (Streamable HTTP) MCP server in Claude, Cursor or 
 }
 ```
 
-**Paying:** MCP has no 402 status, so a paid tool called without its `payment` argument returns the price quote as its result. Sign that quote with your x402 wallet and call the tool again with `payment` set. Two tools are free: `try_it_free` (a real sample result) and `get_service_info`.
+**Paying:** MCP has no 402 status, so a paid tool called without its `payment` argument returns the price quote as its result. Sign that quote with your x402 wallet and call the tool again with `payment` set. Six tools are always free: `try_it_free` (a real sample result), `get_service_info`, `find_service`, `check_service`, `check_my_balance` and `verify_attestation`. Fourteen give 3 free calls a day without a payment: `read_page`, `screenshot_page`, `pdf_to_text`, `weather_forecast`, `airport_delays`, `geocode_address`, `exchange_rate`, `ip_lookup`, `wallet_balance`, `token_info`, `transaction_lookup`, `token_price`, `token_check` and `sec_company`.
 
 ## Tools
 
 | Group | Tools | Price per call |
 |---|---|---|
-| Web pages & documents | read a page in a real browser, screenshot, summarize, page brief, PDF to text, web search + read top pages | $0.002 – $0.015 |
-| Public data | SEC filings, financials, company snapshot and due diligence; US weather (by address or point); FAA airport delays; US address geocoding; exchange rates; IP lookup | $0.002 – $0.03 |
-| On-chain (Base, Ethereum, Solana) | wallet balance and portfolio, token info, token price, token safety check, transaction lookup, pre-trade check | $0.002 – $0.01 |
+| Web pages & documents | web search (with date, site and news filters), search + read top pages, read a page or up to 5 at once in a real browser, screenshot, summarize, page brief, PDF to text | $0.002 – $0.008 |
+| Public data | SEC filings, financials, company snapshot and due diligence; weather anywhere in the world (by point, or US address); FAA airport delays; US address geocoding; exchange rates; IP lookup | $0.002 – $0.03 |
+| On-chain (Base, Ethereum, Solana) | wallet balance and portfolio, token info, token price, token safety check, transaction lookup, pre-trade check | $0.001 – $0.01 |
 | x402 market data | best x402 tools for a task, seller lookup, full market dataset | $0.01 – $0.10 |
 | Product data | price, stock, brand, SKU and images from a store page; compare up to 5 | $0.01 – $0.04 |
-| Proof | signed, timestamped record of what a page said | $0.25 |
+| Proof | signed, timestamped record of what a page said | $0.05 |
 
 Live prices: [`/health`](https://extract.tollkit.dev/health) · every tool with its URL and body: [`llms.txt`](https://api.tollkit.dev/llms.txt) · [tollkit.dev/tools](https://tollkit.dev/tools)
 
