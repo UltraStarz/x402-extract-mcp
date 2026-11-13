@@ -8,7 +8,7 @@
     "url": "https://github.com/UltraStarz/x402-extract-mcp",
     "source": "github"
   },
-  "version": "0.1.0",
+  "version": "0.39.0",
   "remotes": [
     {
       "type": "streamable-http",
